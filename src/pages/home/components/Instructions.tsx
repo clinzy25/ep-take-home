@@ -1,7 +1,8 @@
 import { Box, Button, Container, Link, List, ListItem, ListItemText } from '@mui/material';
 import { useCallback } from 'react';
+import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useGetPokemonByNameQuery } from './pokemonService';
+import { useGetPokemonByNameQuery } from '../../../pokemonService';
 
 // export interface InstructionsProps {}
 const Instructions = () => {
@@ -37,9 +38,11 @@ const Instructions = () => {
         </ListItem>
       </List>
       <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-        <Button color="secondary" variant="contained" onClick={onGo}>
-          Lets Go!
-        </Button>
+        <NavLink to="/gender">
+          <Button color="secondary" variant="contained" onClick={onGo}>
+            Lets Go!
+          </Button>
+        </NavLink>
       </Box>
     </Container>
   );
