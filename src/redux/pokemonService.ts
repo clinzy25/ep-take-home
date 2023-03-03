@@ -15,7 +15,7 @@ export const pokemonApi = createApi({
       transformResponse: (rawResult: { results: Gender[] }) => rawResult.results
     }),
     getPokemonByGender: builder.query<string[], { gender: string; offset: number }>({
-      query: ({ gender, offset }) => `gender/${gender}?limit=20&offset=${offset}`,
+      query: ({ gender, offset }) => `gender/${gender}?limit=10&offset=${offset}`,
       transformResponse: (response: any) => response.pokemon_species_details.map((item: SpecifiedGender) => item.pokemon_species.name)
     })
   })

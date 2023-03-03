@@ -27,18 +27,18 @@ const HomePage = () => {
   const { gender, offset } = useSelector((state: AppState) => state.app);
   const { data, isFetching } = useGetPokemonByGenderQuery({ gender: gender.target, offset });
   const [index, setIndex] = useState(0);
-
+  
   return (
     <View>
       {isFetching ? (
         <CircularProgress />
       ) : (
         <Container sx={ctr}>
-          <Button onClick={() => setIndex(index - 1)}>
+          <Button onClick={() => setIndex(index === 0 ? data?.length - 1 : index - 1)}>
             <CloseIcon sx={iconX} />
           </Button>
           <Match pokemonName={data[index]} />
-          <Button onClick={() => setIndex(index + 1)}>
+          <Button onClick={() => setIndex(index === data?.length - 1 ? 0 : index + 1)}>
             <FavoriteIcon sx={iconHeart} />
           </Button>
         </Container>
