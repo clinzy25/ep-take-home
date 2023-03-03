@@ -8,10 +8,24 @@ import Match from './components/Match';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
 
-const { ctr, iconHeart, iconX } = {
-  ctr: {
+const { matchCtr, iconHeart, iconX, outerCtr, btnCtr, btn } = {
+  outerCtr: {
     display: 'flex',
+    flexDirection: 'column',
     width: 'min-content'
+  },
+  matchCtr: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 'min-content'
+  },
+  btnCtr: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  btn: {
+    flex: 1,
+    margin: '5px'
   },
   iconHeart: {
     color: 'green',
@@ -50,23 +64,31 @@ const HomePage = () => {
     setIndex(index === 0 ? data?.length - 2 : index - 1);
   };
 
-  useEffect(() => {
-    console.log(index);
-  }, [index]);
-
   return (
     <View>
       {isFetching ? (
         <CircularProgress />
       ) : (
-        <Container sx={ctr}>
-          <Button onClick={handleDislike}>
-            <CloseIcon sx={iconX} />
-          </Button>
-          <Match pokemonName={data[index]} />
-          <Button onClick={handleLike}>
-            <FavoriteIcon sx={iconHeart} />
-          </Button>
+        <Container sx={outerCtr}>
+          <Container sx={btnCtr}>
+            <Button color="secondary" variant="contained">
+              My Likes
+            </Button>
+            <Button color="secondary" variant="contained">
+              My Dislikes
+            </Button>
+          </Container>
+          <Container sx={matchCtr}>
+            <Match pokemonName={data[index]} />
+            <Container sx={btnCtr}>
+              <Button variant="outlined" sx={btn} onClick={handleDislike}>
+                <CloseIcon sx={iconX} />
+              </Button>
+              <Button variant="outlined" sx={btn} onClick={handleLike}>
+                <FavoriteIcon sx={iconHeart} />
+              </Button>
+            </Container>
+          </Container>
         </Container>
       )}
     </View>
