@@ -1,6 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { pokemonApi } from './pokemonService';
 import appReducer from './slice';
+import logger from 'redux-logger';
+
+const middlewares = [pokemonApi.middleware, logger]
 
 export const store = configureStore({
   reducer: {
@@ -9,7 +12,7 @@ export const store = configureStore({
     // Services
     [pokemonApi.reducerPath]: pokemonApi.reducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(pokemonApi.middleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares)
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
