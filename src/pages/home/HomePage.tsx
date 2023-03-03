@@ -7,6 +7,7 @@ import { AppState, setLikes } from '../../redux/slice';
 import Match from './components/Match';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
+import { NavLink } from 'react-router-dom';
 
 const { matchCtr, iconHeart, iconX, outerCtr, btnCtr, btn } = {
   outerCtr: {
@@ -71,12 +72,16 @@ const HomePage = () => {
       ) : (
         <Container sx={outerCtr}>
           <Container sx={btnCtr}>
-            <Button color="secondary" variant="contained">
-              My Likes
-            </Button>
-            <Button color="secondary" variant="contained">
-              My Dislikes
-            </Button>
+            <NavLink to="/likes">
+              <Button color="secondary" variant="contained">
+                My Likes
+              </Button>
+            </NavLink>
+            <NavLink to="/dislikes">
+              <Button color="secondary" variant="contained">
+                My Dislikes
+              </Button>
+            </NavLink>
           </Container>
           <Container sx={matchCtr}>
             <Match pokemonName={data[index]} />
