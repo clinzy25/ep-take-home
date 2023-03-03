@@ -1,6 +1,7 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { setGender } from '../../../redux/slice';
 import { Gender } from '../../../types';
 
@@ -41,9 +42,11 @@ const GenderSelect = ({ data }: Props) => {
             </Button>
           ))}
         </Container>
-        <Button sx={btnStyle} color="secondary" variant="contained" onClick={handleSubmit}>
-          Lets Go!
-        </Button>
+        <NavLink to="/home">
+          <Button sx={btnStyle} color="secondary" variant="contained" onClick={handleSubmit}>
+            Lets Go!
+          </Button>
+        </NavLink>
       </Box>
     </>
   );

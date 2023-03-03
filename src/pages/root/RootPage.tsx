@@ -2,7 +2,7 @@ import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import View from '../../components/View';
 import Instructions from './components/Instructions';
 
-const Home = () => (
+const Root = () => (
   <Box
     sx={{
       display: 'flex',
@@ -26,4 +26,4 @@ const Home = () => (
   </Box>
 );
 
-export default Home;
+export default Root;
