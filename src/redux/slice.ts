@@ -7,6 +7,7 @@ export interface AppState {
     target: string;
   };
   pokemon: [];
+  offset: 0;
 }
 
 const initialState: AppState = {
@@ -14,7 +15,8 @@ const initialState: AppState = {
     user: 'male',
     target: 'female'
   },
-  pokemon: []
+  pokemon: [],
+  offset: 0
 };
 
 export const appSlice = createSlice({
