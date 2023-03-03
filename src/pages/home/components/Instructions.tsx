@@ -2,7 +2,7 @@ import { Box, Button, Container, Link, List, ListItem, ListItemText } from '@mui
 import { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useGetPokemonByNameQuery } from '../../../pokemonService';
+import { useGetPokemonByNameQuery } from '../../../redux/pokemonService';
 
 // export interface InstructionsProps {}
 const Instructions = () => {
