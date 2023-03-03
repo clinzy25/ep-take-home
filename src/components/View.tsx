@@ -11,7 +11,11 @@ const View = ({ children }: ViewProps) => {
       sx={{
         display: 'flex',
         // consume available vertical space:
-        flex: 1
+        flex: 1,
+        width: '100vw',
+        height: '100vh',
+        justifyContent: 'center',
+        alignItems: 'center'
       }}>
       {children}
     </Box>

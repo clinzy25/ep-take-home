@@ -3,7 +3,7 @@ import { pokemonApi } from './pokemonService';
 import appReducer from './slice';
 import logger from 'redux-logger';
 
-const middlewares = [pokemonApi.middleware, logger]
+const middlewares = [pokemonApi.middleware, logger];
 
 export const store = configureStore({
   reducer: {
