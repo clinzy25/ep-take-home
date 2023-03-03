@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { IPokemon } from 'pokeapi-typescript';
-import { pokemonApi } from './pokemonService';
-import { Gender } from '../types';
 
 export interface AppState {
+  app: any;
   gender: {
     user: string;
     target: string;

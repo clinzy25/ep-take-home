@@ -1,5 +1,5 @@
 import { Button, CircularProgress, Container } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import View from '../../components/View';
 import { pokemonApi, useGetPokemonByGenderQuery } from '../../redux/pokemonService';
@@ -8,6 +8,8 @@ import Match from './components/Match';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
 import { NavLink } from 'react-router-dom';
+import { AppDispatch } from '../../redux/store';
+import { IPokemon } from 'pokeapi-typescript';
 
 const { matchCtr, iconHeart, iconX, outerCtr, btnCtr, btn } = {
   outerCtr: {
@@ -39,12 +41,12 @@ const { matchCtr, iconHeart, iconX, outerCtr, btnCtr, btn } = {
 };
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { gender, offset } = useSelector((state: AppState) => state.app);
   const { data, isFetching } = useGetPokemonByGenderQuery({ gender: gender.target, offset });
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState<number>(0);
 
-  const pokemon = pokemonApi.endpoints.getPokemonByName.useQueryState(data?.[index]).data;
+  const pokemon: IPokemon = pokemonApi.endpoints.getPokemonByName.useQueryState(data![index] ?? 'bulbasaur').data;
 
   const removeFromCache = () =>
     dispatch(
@@ -56,13 +58,13 @@ const HomePage = () => {
   const handleLike = () => {
     dispatch(setLikes({ pokemon, liked: 1 }));
     removeFromCache();
-    setIndex(index === data?.length - 1 ? 0 : index + 1);
+    setIndex(index === data!.length - 1 ? 0 : index + 1);
   };
 
   const handleDislike = () => {
     dispatch(setLikes({ pokemon, liked: 0 }));
     removeFromCache();
-    setIndex(index === 0 ? data?.length - 2 : index - 1);
+    setIndex(index === 0 ? data!.length - 2 : index - 1);
   };
 
   return (
@@ -84,7 +86,7 @@ const HomePage = () => {
             </NavLink>
           </Container>
           <Container sx={matchCtr}>
-            <Match pokemonName={data[index]} />
+            <Match pokemonName={data![index]} />
             <Container sx={btnCtr}>
               <Button variant="outlined" sx={btn} onClick={handleDislike}>
                 <CloseIcon sx={iconX} />
