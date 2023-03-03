@@ -10,6 +10,11 @@ export interface AppState {
   };
   likes: IPokemon[];
   dislikes: IPokemon[];
+  matches: IPokemon[];
+  matchCondition: {
+    key: string;
+    value: any;
+  };
 }
 
 const initialState: AppState = {
@@ -18,7 +23,12 @@ const initialState: AppState = {
     target: 'female'
   },
   likes: [],
-  dislikes: []
+  dislikes: [],
+  matches: [],
+  matchCondition: {
+    key: 'weight',
+    value: 60
+  }
 };
 
 export const appSlice = createSlice({
@@ -36,6 +46,9 @@ export const appSlice = createSlice({
         state.likes = [...state.likes, pokemon];
       } else {
         state.dislikes = [...state.dislikes, pokemon];
+      }
+      if (pokemon[state.matchCondition.key] > state.matchCondition.value && liked) {
+        state.matches = [...state.matches, pokemon];
       }
     }
   }

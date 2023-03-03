@@ -79,6 +79,11 @@ const HomePage = () => {
                 My Likes
               </Button>
             </NavLink>
+            <NavLink to="/matches">
+              <Button color="secondary" variant="contained">
+                My Matches
+              </Button>
+            </NavLink>
             <NavLink to="/dislikes">
               <Button color="secondary" variant="contained">
                 My Dislikes

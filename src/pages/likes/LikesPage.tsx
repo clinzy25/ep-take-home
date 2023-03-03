@@ -25,21 +25,30 @@ interface Props {
   type: string;
 }
 
-const Image = ({ item }: IPokemon) => (
-  <ImageListItem sx={img} key={item.name}>
-    <img src={item.sprites.other['official-artwork'].front_default} alt={item.name} loading="lazy" />
-    <ImageListItemBar sx={imgName} position="below" title={item.name} />
-  </ImageListItem>
-);
-
 const LikesPage = ({ type }: Props) => {
-  const { likes, dislikes } = useSelector((state: AppState) => state.app);
+  const { likes, dislikes, matches } = useSelector((state: AppState) => state.app);
+
+  const getType = () => {
+    switch (type) {
+      case 'likes':
+        return likes;
+      case 'dislikes':
+        return dislikes;
+      case 'matches':
+        return matches;
+    }
+  };
 
   return (
     <Box sx={ctr}>
       <Typography variant="h2">{type}</Typography>
       <ImageList cols={4} rowHeight={250}>
-        {type === 'likes' ? likes.map((item) => <Image item={item} />) : dislikes.map((item) => <Image item={item} />)}
+        {getType().map((item) => (
+          <ImageListItem sx={img} key={item.name}>
+            <img src={item.sprites.other['official-artwork'].front_default} alt={item.name} loading="lazy" />
+            <ImageListItemBar sx={imgName} position="below" title={item.name} />
+          </ImageListItem>
+        ))}
       </ImageList>
     </Box>
   );
