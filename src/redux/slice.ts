@@ -6,13 +6,15 @@ export interface AppState {
     user: string;
     target: string;
   };
+  pokemon: [];
 }
 
 const initialState: AppState = {
   gender: {
-    user: '',
-    target: ''
-  }
+    user: 'male',
+    target: 'female'
+  },
+  pokemon: []
 };
 
 export const appSlice = createSlice({
@@ -22,6 +24,10 @@ export const appSlice = createSlice({
     setGender(state, action) {
       const { payload } = action;
       state.gender = payload;
+    },
+    setPokemon(state, action) {
+      const { payload } = action;
+      state.pokemon = { ...state.pokemon, ...payload };
     }
   }
 });

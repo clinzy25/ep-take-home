@@ -20,7 +20,7 @@ const GenderSelect = ({ data }: Props) => {
   const [user, setUser] = useState('');
   const [target, setTarget] = useState('');
 
-  const handleSubmit = () => dispatch(setGender({ gender: { user, target } }));
+  const handleSubmit = () => dispatch(setGender({ user, target }));
 
   return (
     <>
