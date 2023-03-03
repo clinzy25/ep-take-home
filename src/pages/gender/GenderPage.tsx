@@ -1,13 +1,11 @@
-import React from 'react';
 import View from '../../components/View';
+import { useGetAllGendersQuery } from '../../redux/pokemonService';
 import GenderSelect from './components/GenderSelect';
 
 const GenderPage = () => {
-  return (
-    <View>
-      <GenderSelect />
-    </View>
-  );
+  const { data, isFetching } = useGetAllGendersQuery();
+
+  return <View>{isFetching ? 'loading' : <GenderSelect data={data} />}</View>;
 };
 
 export default GenderPage;

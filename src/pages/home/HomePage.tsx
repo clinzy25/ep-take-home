@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import View from '../../components/View';
 import Instructions from './components/Instructions';

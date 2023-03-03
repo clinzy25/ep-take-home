@@ -1,6 +1,5 @@
 import { Box, useTheme } from '@mui/material';
 import { ReactNode } from 'react';
-import Instructions from '../pages/home/components/Instructions';
 
 export interface ViewProps {
   children: ReactNode;
