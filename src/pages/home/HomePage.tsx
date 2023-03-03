@@ -46,7 +46,7 @@ const HomePage = () => {
   const { data, isFetching } = useGetPokemonByGenderQuery({ gender: gender.target, offset });
   const [index, setIndex] = useState<number>(0);
 
-  const pokemon: IPokemon = pokemonApi.endpoints.getPokemonByName.useQueryState(data![index] ?? 'bulbasaur').data;
+  const pokemon: IPokemon = pokemonApi.endpoints.getPokemonByName.useQueryState(data?.[index] ?? 'bulbasaur').data;
 
   const removeFromCache = () =>
     dispatch(
