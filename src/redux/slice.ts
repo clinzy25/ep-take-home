@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { IPokemon } from 'pokeapi-typescript';
 import { pokemonApi } from './pokemonService';
+import { Gender } from '../types';
 
 export interface AppState {
   gender: {
@@ -25,11 +26,10 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setGender(state, action) {
-      const { payload } = action;
-      state.gender = payload;
+    setGender(state, action: PayloadAction<AppState['gender']>) {
+      state.gender = action.payload;
     },
-    setLikes(state, action) {
+    setLikes(state, action: PayloadAction<{ pokemon: IPokemon; liked: number }>) {
       const {
         payload: { pokemon, liked }
       } = action;
