@@ -18,6 +18,7 @@ export interface AppState {
 }
 
 const initialState: AppState = {
+  app: undefined,
   gender: {
     user: 'male',
     target: 'female'
@@ -42,12 +43,14 @@ export const appSlice = createSlice({
       const {
         payload: { pokemon, liked }
       } = action;
-      if (liked) {
+      if (liked !== 0) {
         state.likes = [...state.likes, pokemon];
       } else {
         state.dislikes = [...state.dislikes, pokemon];
       }
-      if (pokemon[state.matchCondition.key] > state.matchCondition.value && liked) {
+
+      const isMatch = pokemon[state.matchCondition.key as keyof IPokemon] > state.matchCondition.value && liked !== 0;
+      if (isMatch) {
         state.matches = [...state.matches, pokemon];
       }
     }

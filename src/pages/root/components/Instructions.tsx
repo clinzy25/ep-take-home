@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useGetPokemonByNameQuery } from '../../../redux/pokemonService';
 
 // export interface InstructionsProps {}
-const Instructions = () => {
+const Instructions: React.FC = () => {
   const { data, isFetching } = useGetPokemonByNameQuery('charizard');
   const onGo = useCallback(() => {
     toast.success("Ok, let's do it!");
@@ -19,8 +19,8 @@ const Instructions = () => {
             secondary={
               <>
                 Implement a small multistep wizard utilzing the <Link href="https://pokeapi.co/">Pokemon API</Link>. The wizard can do anything you want, but should make atleast one API call, and
-                utilize the data in the wizard some how. Charizard's first move is 👊 {isFetching ? '?' : data?.moves?.[0]?.move?.name}! We'll be looking at your creativity, use of material-ui, state
-                management, api utilization, typescript, and core react principles.
+                utilize the data in the wizard some how. Charizard&apos;s first move is 👊 {isFetching ? '?' : data?.moves?.[0]?.move?.name}! We&apos;ll be looking at your creativity, use of
+                material-ui, state management, api utilization, typescript, and core react principles.
               </>
             }
           />

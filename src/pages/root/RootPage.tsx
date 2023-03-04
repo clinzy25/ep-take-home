@@ -2,7 +2,7 @@ import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import View from '../../components/View';
 import Instructions from './components/Instructions';
 
-const Root = () => (
+const Root: React.FC = () => (
   <Box
     sx={{
       display: 'flex',

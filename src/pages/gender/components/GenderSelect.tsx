@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { setGender } from '../../../redux/slice';
-import { AppDispatch } from '../../../redux/store';
-import { Gender } from '../../../types';
+import type { AppDispatch } from '../../../redux/store';
+import type { Gender } from '../../../types';
 
 const { btnStyle, boxStyle, btnActive, btnCtr, header } = {
   boxStyle: {
@@ -31,12 +31,17 @@ interface Props {
   data: Gender[] | undefined;
 }
 
-const GenderSelect = ({ data }: Props) => {
+interface Dispatch {
+  payload: { user: string; target: string };
+  type: 'app/setGender';
+}
+
+const GenderSelect: React.FC<Props> = ({ data }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const [user, setUser] = useState<string>('');
   const [target, setTarget] = useState<string>('');
 
-  const handleSubmit = () => dispatch(setGender({ user, target }));
+  const handleSubmit = (): Dispatch => dispatch(setGender({ user, target }));
 
   return (
     <Box sx={boxStyle}>

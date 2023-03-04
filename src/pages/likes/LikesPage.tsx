@@ -1,7 +1,7 @@
-import { Container, ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
+import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../redux/slice';
+import type { AppState } from '../../redux/slice';
 import type { IPokemon } from 'pokeapi-typescript';
 
 const { ctr, img, imgName } = {
@@ -25,10 +25,10 @@ interface Props {
   type: string;
 }
 
-const LikesPage = ({ type }: Props) => {
+const LikesPage: React.FC<Props> = ({ type }: Props) => {
   const { likes, dislikes, matches } = useSelector((state: AppState) => state.app);
 
-  const getType = () => {
+  const getType = (): IPokemon[] => {
     switch (type) {
       case 'likes':
         return likes;
@@ -36,6 +36,8 @@ const LikesPage = ({ type }: Props) => {
         return dislikes;
       case 'matches':
         return matches;
+      default:
+        return likes;
     }
   };
 
@@ -53,7 +55,5 @@ const LikesPage = ({ type }: Props) => {
     </Box>
   );
 };
-
-// srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
 
 export default LikesPage;

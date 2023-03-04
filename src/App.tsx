@@ -4,19 +4,19 @@ import GenderPage from './pages/gender/GenderPage';
 import HomePage from './pages/home/HomePage';
 import LikesPage from './pages/likes/LikesPage';
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<RootPage />} />
         <Route path="/gender" element={<GenderPage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/likes" element={<LikesPage type='likes' />} />
-        <Route path="/dislikes" element={<LikesPage type='dislikes' />} />
-        <Route path="/matches" element={<LikesPage type='matches' />} />
+        <Route path="/likes" element={<LikesPage type="likes" />} />
+        <Route path="/dislikes" element={<LikesPage type="dislikes" />} />
+        <Route path="/matches" element={<LikesPage type="matches" />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

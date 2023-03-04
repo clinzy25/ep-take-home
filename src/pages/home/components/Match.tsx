@@ -21,7 +21,7 @@ interface Props {
   pokemonName: string;
 }
 
-const Match = ({ pokemonName }: Props) => {
+const Match: React.FC<Props> = ({ pokemonName }: Props) => {
   const { data, isFetching } = useGetPokemonByNameQuery(pokemonName);
 
   return (
