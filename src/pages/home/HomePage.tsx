@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Container } from '@mui/material';
+import { Button, CircularProgress, Container, useTheme } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import View from '../../components/View';
@@ -12,40 +12,42 @@ import type { AppState } from '../../redux/slice';
 import type { AppDispatch } from '../../redux/store';
 import type { PatchCollection } from '@reduxjs/toolkit/dist/query/core/buildThunks';
 
-const { matchCtr, iconHeart, iconX, outerCtr, btnCtr, btn } = {
-  outerCtr: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: 'min-content'
-  },
-  matchCtr: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: 'min-content'
-  },
-  btnCtr: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  btn: {
-    flex: 1,
-    margin: '5px'
-  },
-  iconHeart: {
-    color: 'green',
-    fontSize: 40
-  },
-  iconX: {
-    color: 'red',
-    fontSize: 40
-  }
-};
-
 const HomePage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { gender, offset } = useSelector((state: AppState) => state.app);
   const { data, isFetching } = useGetPokemonByGenderQuery({ gender: gender.target, offset });
   const [index, setIndex] = useState<number>(0);
+  const theme = useTheme();
+
+  const { matchCtr, iconHeart, iconX, outerCtr, btnCtr, btn } = {
+    outerCtr: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: 'min-content'
+    },
+    matchCtr: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: 'min-content'
+    },
+    btnCtr: {
+      display: 'flex',
+      justifyContent: 'space-between'
+    },
+    btn: {
+      flex: 1,
+      margin: '5px',
+      backgroundColor: theme.palette.secondary.main
+    },
+    iconHeart: {
+      color: 'green',
+      fontSize: 40
+    },
+    iconX: {
+      color: 'red',
+      fontSize: 40
+    }
+  };
 
   const pokemon = pokemonApi.endpoints.getPokemonByName.useQueryState(data?.[index] ?? 'bulbasaur').data;
 
