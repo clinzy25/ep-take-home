@@ -19,6 +19,33 @@ const HomePage: React.FC = () => {
   const [index, setIndex] = useState<number>(0);
   const theme = useTheme();
 
+  const currentPokemon = pokemonApi.endpoints.getPokemonByName.useQueryState(data?.[index] ?? 'bulbasaur').data;
+
+  const removeFromCache = (): PatchCollection =>
+    dispatch(
+      pokemonApi.util.updateQueryData('getPokemonByGender', { gender: gender.target, offset }, (pokemon) => {
+        pokemon.splice(index, 1);
+      })
+    );
+
+  const handleLike = (): void => {
+    if (typeof currentPokemon === 'undefined') {
+      throw new Error('pokemon is undefined');
+    }
+    dispatch(setLikes({ currentPokemon, liked: 1 }));
+    removeFromCache();
+    setIndex(index === data!.length - 1 ? 0 : index + 1);
+  };
+
+  const handleDislike = (): void => {
+    if (typeof currentPokemon === 'undefined') {
+      throw new Error('pokemon is undefined');
+    }
+    dispatch(setLikes({ currentPokemon, liked: 0 }));
+    removeFromCache();
+    setIndex(index === 0 ? data!.length - 2 : index - 1);
+  };
+
   const { matchCtr, iconHeart, iconX, outerCtr, btnCtr, btn } = {
     outerCtr: {
       display: 'flex',
@@ -47,33 +74,6 @@ const HomePage: React.FC = () => {
       color: 'red',
       fontSize: 40
     }
-  };
-
-  const pokemon = pokemonApi.endpoints.getPokemonByName.useQueryState(data?.[index] ?? 'bulbasaur').data;
-
-  const removeFromCache = (): PatchCollection =>
-    dispatch(
-      pokemonApi.util.updateQueryData('getPokemonByGender', { gender: gender.target, offset }, (pokemon) => {
-        pokemon.splice(index, 1);
-      })
-    );
-
-  const handleLike = (): void => {
-    if (typeof pokemon === 'undefined') {
-      throw new Error('pokemon is undefined');
-    }
-    dispatch(setLikes({ pokemon, liked: 1 }));
-    removeFromCache();
-    setIndex(index === data!.length - 1 ? 0 : index + 1);
-  };
-
-  const handleDislike = (): void => {
-    if (typeof pokemon === 'undefined') {
-      throw new Error('pokemon is undefined');
-    }
-    dispatch(setLikes({ pokemon, liked: 0 }));
-    removeFromCache();
-    setIndex(index === 0 ? data!.length - 2 : index - 1);
   };
 
   return (

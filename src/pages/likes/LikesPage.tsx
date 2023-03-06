@@ -3,24 +3,6 @@ import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import type { AppState } from '../../redux/slice';
 import type { IPokemon } from 'pokeapi-typescript';
-
-const { ctr, img, imgName } = {
-  ctr: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100vw',
-    height: '100vh'
-  },
-  img: {
-    width: '200px',
-    height: '200px'
-  },
-  imgName: {
-    textAlign: 'center'
-  }
-};
-
 interface Props {
   type: string;
 }
@@ -38,6 +20,23 @@ const LikesPage: React.FC<Props> = ({ type }: Props) => {
         return matches;
       default:
         return likes;
+    }
+  };
+
+  const { ctr, img, imgName } = {
+    ctr: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      width: '100vw',
+      height: '100vh'
+    },
+    img: {
+      width: '200px',
+      height: '200px'
+    },
+    imgName: {
+      textAlign: 'center'
     }
   };
 

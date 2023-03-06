@@ -21,6 +21,8 @@ const GenderSelect: React.FC<Props> = ({ data }: Props) => {
   const [target, setTarget] = useState<string>('');
   const theme = useTheme();
 
+  const handleSubmit = (): Dispatch => dispatch(setGender({ user, target }));
+
   const { btnStyle, boxStyle, btnActive, btnCtr, header } = {
     boxStyle: {
       display: 'flex',
@@ -42,8 +44,6 @@ const GenderSelect: React.FC<Props> = ({ data }: Props) => {
       textAlign: 'center'
     }
   };
-
-  const handleSubmit = (): Dispatch => dispatch(setGender({ user, target }));
 
   return (
     <Box sx={boxStyle}>

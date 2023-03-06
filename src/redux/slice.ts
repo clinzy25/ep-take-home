@@ -8,6 +8,7 @@ export interface AppState {
     user: string;
     target: string;
   };
+  offset: number;
   likes: IPokemon[];
   dislikes: IPokemon[];
   matches: IPokemon[];
@@ -23,6 +24,7 @@ const initialState: AppState = {
     user: 'male',
     target: 'female'
   },
+  offset: 0,
   likes: [],
   dislikes: [],
   matches: [],
@@ -39,19 +41,19 @@ export const appSlice = createSlice({
     setGender(state, action: PayloadAction<AppState['gender']>) {
       state.gender = action.payload;
     },
-    setLikes(state, action: PayloadAction<{ pokemon: IPokemon; liked: number }>) {
+    setLikes(state, action: PayloadAction<{ currentPokemon: IPokemon; liked: number }>) {
       const {
-        payload: { pokemon, liked }
+        payload: { currentPokemon, liked }
       } = action;
       if (liked !== 0) {
-        state.likes = [...state.likes, pokemon];
+        state.likes = [...state.likes, currentPokemon];
       } else {
-        state.dislikes = [...state.dislikes, pokemon];
+        state.dislikes = [...state.dislikes, currentPokemon];
       }
 
-      const isMatch = pokemon[state.matchCondition.key as keyof IPokemon] > state.matchCondition.value && liked !== 0;
+      const isMatch = currentPokemon[state.matchCondition.key as keyof IPokemon] > state.matchCondition.value && liked !== 0;
       if (isMatch) {
-        state.matches = [...state.matches, pokemon];
+        state.matches = [...state.matches, currentPokemon];
       }
     }
   }
